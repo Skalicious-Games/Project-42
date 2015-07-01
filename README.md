@@ -2,6 +2,7 @@
 A game of sorts
 
 IMPORT PROCEDURE
+
 1. Make sure you have gradle integration for eclipse https://marketplace.eclipse.org/content/gradle-integration-eclipse-44
 
 2. Clone git repository to your local machine
