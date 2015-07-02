@@ -9,7 +9,7 @@ IMPORT PROCEDURE
 
 3. Open Eclipse
 
-4. File > Import > Git > Projects from Git (NOT Existing Projects)
+4. File > Import > Gradle > Gradle Project (NOT Existing Projects)
 
 5. Select root folder for project
 
