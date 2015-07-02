@@ -37,4 +37,12 @@ public class Entities {
 		return entity;
 	}
 	
+	public static Entity level (String[] tilemap) {
+		Entity entity = new Entity();
+		
+		entity.add(new TileMapComponent(tilemap));
+		
+		return entity;
+	}
+	
 }
