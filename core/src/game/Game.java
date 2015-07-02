@@ -20,23 +20,21 @@ public class Game extends ApplicationAdapter {
 	public void create () {
 		Engine engine = new Engine();
 		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
+		//img = new Texture(Gdx.files.local("box_60x60.png"));
 		entityManager = new EntityManager(engine, batch);
 	}
 
 	@Override
 	public void render () {
-		Gdx.gl.glClearColor(1, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.begin();
+		//Gdx.gl.glClearColor(1, 1, 1, 1);
+		//Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		//batch.begin();
 		entityManager.update();
-		batch.draw(img, 0, 0);
-		batch.end();
+		//batch.draw(img, 0, 0);
+		//batch.end();
 	}
 	
 	public void main (String[] args) {
-		Game game = new Game();
-		game.create();
-		game.render();
+		
 	}
 }

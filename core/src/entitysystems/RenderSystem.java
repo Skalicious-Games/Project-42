@@ -32,12 +32,13 @@ public class RenderSystem extends EntitySystem {
 	}
 	
 	public void update (float deltaTime) {
+		batch.begin();
 		for(Entity entity : entities) {
-			//SpriteComponent sprite = entity.getComponent(SpriteComponent.class);
-			//PositionComponent position = entity.getComponent(PositionComponent.class);
 			SpriteComponent sprite = sm.get(entity);
 			PositionComponent position = pm.get(entity);
 			batch.draw(sprite.sprite.getTexture(), position.hashCode(), position.y);
+			System.out.println("drawing sprite");
 		}
+		batch.end();
 	}
 }

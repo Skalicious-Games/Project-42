@@ -16,7 +16,6 @@ public class EntityManager {
 	private float deltaTime = 0;
 	
 	public EntityManager(Engine e, SpriteBatch batch) {
-		
 		engine = e;
 		
 		//Create all needed systems
@@ -51,7 +50,7 @@ public class EntityManager {
 					case '0':
 						break;
 					case '1':
-						Entity platform = Entities.platform(i*60, j*60, new Texture("assets/box_60x60.png"));
+						Entity platform = Entities.platform(i*60, j*60, new Texture(Gdx.files.local("box_60x60.png")), 2);
 						engine.addEntity(platform);
 						break;
 				}
@@ -59,13 +58,13 @@ public class EntityManager {
 		}
 		
 		//Create player entity and add it to engine
-		Entity player = Entities.player(100, 600, 0, 0, new Texture("assets/player_40x40.png"));
+		Entity player = Entities.player(100, 600, 0, 0, new Texture(Gdx.files.local("player_40x40.png")), 1);
 		engine.addEntity(player);
 	}
 
 	public void update() {
 		deltaTime = Gdx.graphics.getDeltaTime();
-		engine.update(deltaTime);		
+		engine.update(deltaTime);
 	}
 	
 }

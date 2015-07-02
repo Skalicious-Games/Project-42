@@ -1,3 +1,4 @@
+//not used
 package game.model;
 
 //interface used to call methods in the model from the view
