@@ -2,19 +2,21 @@ package entitymanager;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import entities.Entities;
 import entitysystems.MovementSystem;
 import entitysystems.RenderSystem;
-import javafx.scene.Node;
-import javafx.scene.paint.Color;
 
 public class EntityManager {
 	private Engine engine;
 	
+	private float deltaTime = 0;
+	
 	public EntityManager(Engine e, SpriteBatch batch) {
+		
 		engine = e;
 		
 		//Create all needed systems
@@ -59,6 +61,11 @@ public class EntityManager {
 		//Create player entity and add it to engine
 		Entity player = Entities.player(100, 600, 0, 0, new Texture("assets/player_40x40.png"));
 		engine.addEntity(player);
+	}
+
+	public void update() {
+		deltaTime = Gdx.graphics.getDeltaTime();
+		engine.update(deltaTime);		
 	}
 	
 }
