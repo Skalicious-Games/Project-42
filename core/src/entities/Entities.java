@@ -48,4 +48,16 @@ public class Entities {
 		return entity;
 	}
 	
+	public static Entity bullet(float x, float y, float xvel, float yvel, Texture texture, int priority) {
+		Entity entity = new Entity();
+		
+		entity.add(new PositionComponent(x, y));
+		entity.add(new VelocityComponent(xvel, yvel));
+		entity.add(new SpriteComponent(texture));
+		entity.add(new RenderPriorityComponent(priority));
+		entity.add(new RenderComponent());
+		
+		return entity;
+	}
+	
 }

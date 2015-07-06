@@ -22,7 +22,7 @@ public class EntityManager {
 		//Create all needed systems
 		MovementSystem ms = new MovementSystem();
 		RenderSystem rs = new RenderSystem(batch);
-		PlayerInputSystem pis = new PlayerInputSystem();
+		PlayerInputSystem pis = new PlayerInputSystem(e);
 		
 		//Add all systems to engine
 		engine.addSystem(ms);
