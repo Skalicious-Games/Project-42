@@ -23,8 +23,11 @@ http://www.gamefromscratch.com/page/LibGDX-Video-Tutorial-Series.aspx (video)
 
 Helpful Youtube Channels
 
-https://www.youtube.com/channel/UC_IV37n-uBpRp64hQIwywWQ
+https://www.youtube.com/channel/UC_IV37n-uBpRp64hQIwywWQ - BlockBunny libGCX box2d tutorials
 
-https://www.youtube.com/channel/UCL_5eiPIzm--ppVBxGcSXQQ
+https://www.youtube.com/channel/UCL_5eiPIzm--ppVBxGcSXQQ - libGDX tutorials
 
-https://www.youtube.com/channel/UCmjXvUa36DjqCJ1zktXVbUA
+https://www.youtube.com/channel/UCmjXvUa36DjqCJ1zktXVbUA - javaFX tutorials
+
+https://www.youtube.com/watch?v=rzBVTPaUUDg&index=1&list=PLZm85UZQLd2TPXpUJfDEdWTSgszionbJy - libGDX tutorial by creating flappybird clone
+
