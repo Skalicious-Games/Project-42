@@ -10,6 +10,8 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import components.PositionComponent;
@@ -32,11 +34,13 @@ public class RenderSystem extends EntitySystem {
 	}
 	
 	public void update (float deltaTime) {
+		Gdx.gl.glClearColor(0, 0, 0, 1);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
 		for(Entity entity : entities) {
 			SpriteComponent sprite = sm.get(entity);
 			PositionComponent position = pm.get(entity);
-			batch.draw(sprite.sprite.getTexture(), position.hashCode(), position.y);
+			batch.draw(sprite.sprite.getTexture(), position.x, position.y);
 		}
 		batch.end();
 	}

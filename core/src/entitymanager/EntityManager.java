@@ -35,22 +35,18 @@ public class EntityManager {
 				"000000111000000000000000000000",
 				"000001000000000000000000000000",
 				"110000000000000000000000000000",
-				"000111000000000000000000000000",
-				"000000001110000000000000000000",
-				"000000000000011100000000020000",
-				"000001110000000000011100011000",
 				"111111110011110001111100111111"
 		};
 		
 		//Temporary loop for making the level map
-		for (int i = 0; i < tilemap1.length; i++) {
+		for (int i = 0; i < tilemap1.length ; i++) {
 			String line = tilemap1[i]; //a row
 			for (int j = 0; j < line.length(); j++) {
 				switch (line.charAt(j)) {
 					case '0':
 						break;
 					case '1':
-						Entity platform = Entities.platform(i*60, j*60, new Texture(Gdx.files.local("box_60x60.png")), 2);
+						Entity platform = Entities.platform(j*60, (tilemap1.length - i)*60 - 60, new Texture(Gdx.files.local("box_60x60.png")), 2);
 						engine.addEntity(platform);
 						break;
 				}
@@ -58,7 +54,7 @@ public class EntityManager {
 		}
 		
 		//Create player entity and add it to engine
-		Entity player = Entities.player(100, 600, 0, 0, new Texture(Gdx.files.local("player_40x40.png")), 1);
+		Entity player = Entities.player(10, 120, 0, 0, new Texture(Gdx.files.local("player_40x40.png")), 1);
 		engine.addEntity(player);
 	}
 
