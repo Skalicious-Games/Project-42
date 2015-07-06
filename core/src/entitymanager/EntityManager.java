@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import entities.Entities;
 import entitysystems.MovementSystem;
+import entitysystems.PlayerInputSystem;
 import entitysystems.RenderSystem;
 
 public class EntityManager {
@@ -21,10 +22,12 @@ public class EntityManager {
 		//Create all needed systems
 		MovementSystem ms = new MovementSystem();
 		RenderSystem rs = new RenderSystem(batch);
+		PlayerInputSystem pis = new PlayerInputSystem();
 		
 		//Add all systems to engine
 		engine.addSystem(ms);
 		engine.addSystem(rs);
+		engine.addSystem(pis);
 		
 		//Example level data
 		String[] tilemap1 = new String[] {

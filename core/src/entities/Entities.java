@@ -24,6 +24,7 @@ public class Entities {
 		entity.add(new SpriteComponent(texture));
 		entity.add(new RenderPriorityComponent(priority));
 		entity.add(new RenderComponent());
+		entity.add(new PlayerInputComponent());
 		
 		return entity;
 	}
