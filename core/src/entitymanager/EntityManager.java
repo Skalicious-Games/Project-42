@@ -57,7 +57,7 @@ public class EntityManager {
 						break;
 				}
 			}
-		}
+		}	
 		
 		//Create player entity and add it to engine
 		Entity player = Entities.player(10, 120, 0, 0, new Texture(Gdx.files.local("player_40x40.png")), 1);
