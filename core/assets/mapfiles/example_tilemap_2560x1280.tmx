@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-up" width="80" height="40" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="practicetileset" tilewidth="1" tileheight="1"/>
+ <tileset firstgid="1" name="practicetileset" tilewidth="32" tileheight="32">
+  <image source="../../../../../Pictures/practice_tileset/practicetileset.PNG" width="96" height="32"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="80" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt1zcOgDAUBFHC/e9MhUSBiLv8wDzJNWZkbDMMAAAAAAAAALoadwYAAE/snSnKMX33KlZRZ22XhpH9OjSM7udqqNhjrj4nQpf98E17x3OrnUOV/9UyNOzQL7Jh1X5Zvvsu+9Adyjkr1l+1hso7jLJfpYYq6n5/a+jop7zfZ9flPZwyr4M5wRyqWtu5+x2tlazr6sy23dO5ZtlzVXdo11DO22EB5OQBJw==
+  </data>
+ </layer>
+</map>
