@@ -16,6 +16,38 @@ import components.*;
 
 public class Entities {
 	
+	public static Entity bullet (float x, float y, float xvel, float yvel, Texture texture, int priority) {
+		Entity entity = new Entity();
+		
+		entity.add(new PositionComponent(x, y));
+		entity.add(new VelocityComponent(xvel, yvel));
+		entity.add(new SpriteComponent(texture));
+		entity.add(new RenderPriorityComponent(priority));
+		entity.add(new RenderComponent());
+		
+		return entity;
+	}
+	
+	public static Entity enemy (float x, float y, float xvel, float yvel, Texture texture, int priority) {
+		Entity entity = new Entity();
+		
+		entity.add(new PositionComponent(x, y));
+		entity.add(new VelocityComponent(xvel, yvel));
+		entity.add(new SpriteComponent(texture));
+		entity.add(new RenderPriorityComponent(priority));
+		entity.add(new RenderComponent());
+		
+		return entity;
+	}
+	
+	public static Entity level (String[] tilemap) {
+		Entity entity = new Entity();
+		
+		entity.add(new TileMapComponent(tilemap));
+		
+		return entity;
+	}
+	
 	public static Entity player (float x, float y, float xvel, float yvel, Texture texture, int priority) {
 		Entity entity = new Entity();
 		
@@ -33,26 +65,6 @@ public class Entities {
 		Entity entity = new Entity();
 		
 		entity.add(new PositionComponent(x, y));
-		entity.add(new SpriteComponent(texture));
-		entity.add(new RenderPriorityComponent(priority));
-		entity.add(new RenderComponent());
-		
-		return entity;
-	}
-	
-	public static Entity level (String[] tilemap) {
-		Entity entity = new Entity();
-		
-		entity.add(new TileMapComponent(tilemap));
-		
-		return entity;
-	}
-	
-	public static Entity bullet(float x, float y, float xvel, float yvel, Texture texture, int priority) {
-		Entity entity = new Entity();
-		
-		entity.add(new PositionComponent(x, y));
-		entity.add(new VelocityComponent(xvel, yvel));
 		entity.add(new SpriteComponent(texture));
 		entity.add(new RenderPriorityComponent(priority));
 		entity.add(new RenderComponent());
