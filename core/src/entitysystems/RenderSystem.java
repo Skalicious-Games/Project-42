@@ -41,7 +41,6 @@ public class RenderSystem extends EntitySystem {
 			SpriteComponent sprite = sm.get(entity);
 			PositionComponent position = pm.get(entity);
 			batch.draw(sprite.sprite.getTexture(), position.x, position.y);
-			//batch.draw(region, x, y, originX, originY, width, height, scaleX, scaleY, rotation);
 		}
 		batch.end();
 	}
