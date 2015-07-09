@@ -73,7 +73,6 @@ public class Entities {
 		Entity entity = new Entity();
 		
 		entity.add(new PositionComponent(x, y));
-		System.out.println("x = " + x + " y = " + y);
 		entity.add(new SpriteComponent(texture));
 		
 		//Create Box2D Body
@@ -93,7 +92,7 @@ public class Entities {
 		
 		shape.dispose();
 		
-		entity.add(new Box2DBodyComponent(body, fixture));
+		entity.add(new BodyComponent(body, fixture));
 		entity.add(new RenderComponent());
 		body.setUserData(entity);
 		
