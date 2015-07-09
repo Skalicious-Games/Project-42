@@ -8,6 +8,7 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.physics.box2d.World;
 
 import components.PlayerInputComponent;
 import components.PositionComponent;
@@ -17,15 +18,17 @@ import entities.Entities;
 public class PlayerInputSystem extends IteratingSystem {
 	
 	Engine engine;
+	World world;
 	
 	int dir = 1;
 	
 	private ComponentMapper<VelocityComponent> vm = ComponentMapper.getFor(VelocityComponent.class);
 	private ComponentMapper<PositionComponent> pm = ComponentMapper.getFor(PositionComponent.class);
 	
-	public PlayerInputSystem(Engine e) {
+	public PlayerInputSystem(Engine e, World world) {
 		super(Family.all(PlayerInputComponent.class).get());
 		this.engine = e;
+		this.world = world;
 	}
 
 	@Override
@@ -52,7 +55,7 @@ public class PlayerInputSystem extends IteratingSystem {
 		velocity.x = dir * speed;
 		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-			Entity bullet = Entities.bullet(position.x + 40, position.y + 20, 500 * dir, 0, new Texture(Gdx.files.local("bullet_20x10.png")), 2);
+			Entity bullet = Entities.bullet(position.x + 40, position.y + 20, new Texture(Gdx.files.local("bullet_20x10.png")), world);
 			engine.addEntity(bullet);
 		}
 	}

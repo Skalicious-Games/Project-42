@@ -26,42 +26,47 @@ import components.PositionComponent;
 import components.RenderComponent;
 import components.SpriteComponent;
 
+import static variables.Variables.PIXELS_TO_METERS;
+
 public class Box2DRenderSystem extends EntitySystem {
 	private ImmutableArray<Entity> entities;
 	private World world;
 	private Box2DDebugRenderer renderer;
-	private OrthographicCamera cam;
+	private OrthographicCamera camera;
 	private SpriteBatch batch;
 	
-	private ComponentMapper<PositionComponent> pm = ComponentMapper.getFor(PositionComponent.class);
 	private ComponentMapper<SpriteComponent> sm = ComponentMapper.getFor(SpriteComponent.class);
 	private ComponentMapper<BodyComponent> bm = ComponentMapper.getFor(BodyComponent.class);
 	
 	public Box2DRenderSystem (World world, SpriteBatch batch) {
 		this.world = world;
 		this.batch = batch;
+		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 	}
 	
 	public void addedToEngine(Engine engine) {
-		entities = engine.getEntitiesFor(Family.all(SpriteComponent.class, PositionComponent.class, BodyComponent.class).get());
+		entities = engine.getEntitiesFor(Family.all(SpriteComponent.class, BodyComponent.class).get());
 	}
 	
 	public void update (float deltaTime) {
+		camera.update();
 		//Update box2d world
-		world.step(deltaTime, 6, 2);
+		world.step(1f/60f, 6, 2);
 		
 		//Clear screen then update
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
+		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
 		for (Entity entity : entities) {
 			SpriteComponent sprite = sm.get(entity);
-			PositionComponent position = pm.get(entity);
-			BodyComponent body = bm.get(entity);
-			position.x = body.body.getPosition().x;
-			position.y = body.body.getPosition().y;
-			batch.draw(sprite.sprite.getTexture(), body.body.getPosition().x, body.body.getPosition().y);
+			BodyComponent body = bm.get(entity);;
+			sprite.sprite.setPosition((body.body.getPosition().x * PIXELS_TO_METERS) - sprite.sprite.getWidth()/2,
+					(body.body.getPosition().y * PIXELS_TO_METERS) - sprite.sprite.getHeight()/2);
+			batch.draw(sprite.sprite, sprite.sprite.getX() - Gdx.graphics.getWidth()/2, sprite.sprite.getY() - Gdx.graphics.getHeight()/2,sprite.sprite.getOriginX(),
+                    sprite.sprite.getOriginY(), sprite.sprite.getWidth(), sprite.sprite.getHeight(), 
+                    sprite.sprite.getScaleX(), sprite.sprite.getScaleY(), sprite.sprite.getRotation());
 		}
 		batch.end();
 

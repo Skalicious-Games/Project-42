@@ -13,8 +13,9 @@ public class SpriteComponent extends Component {
 	
 	//Constructor takes a texture, and sets a sprite
 	//This is because sprites have some added functionality
-	public SpriteComponent(Texture texture) {
+	public SpriteComponent(Texture texture, float x, float y) {
 		sprite = new Sprite(texture);
+		sprite.setPosition(x, y);
 	}
 
 }
