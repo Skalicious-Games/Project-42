@@ -8,32 +8,40 @@ import com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.World;
 
 import entities.Entities;
+import entitysystems.Box2DRenderSystem;
 import entitysystems.MovementSystem;
 import entitysystems.PlayerInputSystem;
 import entitysystems.RenderSystem;
 
 public class EntityManager {
 	private Engine engine;
+	World world;
 	
 	private float deltaTime = 0;
 	
 	public EntityManager(Engine e, SpriteBatch batch) {
 		engine = e;
+		world = new World(new Vector2(0, -10f), true);
 		
 		//Create all needed systems
 		MovementSystem ms = new MovementSystem();
 		RenderSystem rs = new RenderSystem(batch);
 		PlayerInputSystem pis = new PlayerInputSystem(e);
+		Box2DRenderSystem brs = new Box2DRenderSystem(batch, world);
+		
 		
 		//Add all systems to engine
 		engine.addSystem(ms);
 		engine.addSystem(rs);
 		engine.addSystem(pis);
+		engine.addSystem(brs);
 		
 		//Example level data
-		String[] tilemap1 = new String[] {
+		/*String[] tilemap1 = new String[] {
 				"000000000000000000000000000000",
 				"000000000000000000000000000000",
 				"000000000000001110000000000000",
@@ -57,11 +65,15 @@ public class EntityManager {
 						break;
 				}
 			}
-		}	
+		}*/	
 		
 		//Create player entity and add it to engine
-		Entity player = Entities.player(10, 120, 0, 0, new Texture(Gdx.files.local("player_40x40.png")), 1);
-		engine.addEntity(player);
+		//Entity player = Entities.player(10, 120, 0, 0, new Texture(Gdx.files.local("player_40x40.png")), 1);
+		//engine.addEntity(player);
+		
+		//Create box2d player entity and add it to engine
+		Entity player2 = Entities.b2DPlayer(200, 200, new Texture(Gdx.files.local("player_40x40.png")), world);
+		engine.addEntity(player2);
 	}
 
 	public void update() {
