@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import entities.Entities;
+import entitysystems.Box2DRenderSystem;
 import entitysystems.MovementSystem;
 import entitysystems.PlayerInputSystem;
 import entitysystems.RenderSystem;
