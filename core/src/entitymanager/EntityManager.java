@@ -45,8 +45,10 @@ public class EntityManager {
 		Entity player = Entities.box2DPlayer(640, 700, new Texture(Gdx.files.local("player_40x40.png")), world);
 		engine.addEntity(player);
 		
-		Entity platform = Entities.platform(640, 50, new Texture(Gdx.files.local("box_60x60.png")), world);
-		engine.addEntity(platform);
+		for (int i = 0; i < 20; i++) {
+			Entity platform = Entities.platform(0 + i * 60, 50, new Texture(Gdx.files.local("box_60x60.png")), world);
+			engine.addEntity(platform);
+		}
 		
 	}
 
