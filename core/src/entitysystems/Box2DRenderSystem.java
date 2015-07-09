@@ -13,7 +13,6 @@ import com.badlogic.gdx.physics.box2d.World;
 
 import components.BodyComponent;
 import components.PositionComponent;
-import components.RenderComponent;
 import components.SpriteComponent;
 
 public class Box2DRenderSystem extends EntitySystem {
@@ -46,7 +45,9 @@ public class Box2DRenderSystem extends EntitySystem {
 			BodyComponent body = bm.get(entity);
 			position.x = body.body.getPosition().x;
 			position.y = body.body.getPosition().y;
-			batch.draw(sprite.sprite.getTexture(), position.x, position.y);
+			batch.draw(sprite.sprite, position.x, position.y, sprite.sprite.getOriginX(),
+                    sprite.sprite.getOriginY(), sprite.sprite.getWidth(),sprite.sprite.getHeight(),
+                    sprite.sprite.getScaleX(),sprite.sprite.getScaleY(), sprite.sprite.getRotation());
 		}
 		batch.end();
 	}

@@ -5,11 +5,12 @@
 package components;
 
 import com.badlogic.ashley.core.Component;
+import com.badlogic.gdx.maps.tiled.TiledMap;
 
 public class TileMapComponent extends Component {
-	public String[] tilemap;
+	public TiledMap tilemap;
 	
-	public TileMapComponent (String[] tilemap) {
+	public TileMapComponent (TiledMap tilemap) {
 		this.tilemap = tilemap;
 	}
 }

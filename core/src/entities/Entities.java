@@ -12,6 +12,7 @@ package entities;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Fixture;
@@ -47,7 +48,7 @@ public class Entities {
 		return entity;
 	}
 	
-	public static Entity level (String[] tilemap) {
+	public static Entity level (TiledMap tilemap) {
 		Entity entity = new Entity();
 		
 		entity.add(new TileMapComponent(tilemap));
@@ -87,6 +88,7 @@ public class Entities {
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = shape;
 		fixtureDef.density = 1f;
+		fixtureDef.restitution = 0.75f;
 		Fixture fixture = body.createFixture(fixtureDef);
 		shape.dispose();
 		
@@ -95,13 +97,28 @@ public class Entities {
 		return entity;
 	}
 	
-	public static Entity platform (float x, float y, Texture texture, int priority) {
+	public static Entity platform (float x, float y, Texture texture, World world) {
 		Entity entity = new Entity();
 		
 		entity.add(new PositionComponent(x, y));
 		entity.add(new SpriteComponent(texture));
-		entity.add(new RenderPriorityComponent(priority));
-		entity.add(new RenderComponent());
+		
+		//Create box2D body
+		BodyDef bodyDef = new BodyDef();
+		bodyDef.type = BodyDef.BodyType.StaticBody;
+		bodyDef.position.set(x, y);
+		Body body = world.createBody(bodyDef);
+		
+		Sprite sprite = new Sprite(texture);
+		PolygonShape shape = new PolygonShape();
+		shape.setAsBox(sprite.getWidth() / 2, sprite.getHeight() / 2);
+		
+		FixtureDef fixtureDef = new FixtureDef();
+		fixtureDef.shape = shape;
+		Fixture fixture = body.createFixture(fixtureDef);
+		shape.dispose();
+		
+		entity.add(new BodyComponent(body, fixture));
 		
 		return entity;
 	}
