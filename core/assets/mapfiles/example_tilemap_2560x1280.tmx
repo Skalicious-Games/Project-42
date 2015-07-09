@@ -1,12 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-up" width="80" height="40" tilewidth="32" tileheight="32" nextobjectid="1">
+<map version="1.0" orientation="orthogonal" renderorder="right-up" width="80" height="40" tilewidth="32" tileheight="32" nextobjectid="10">
  <tileset firstgid="1" name="practicetileset" tilewidth="1" tileheight="1"/>
  <tileset firstgid="1" name="practicetileset" tilewidth="32" tileheight="32">
-  <image source="../../../../../Pictures/practice_tileset/practicetileset.PNG" width="96" height="32"/>
+  <image source="practicetileset.PNG" width="96" height="32"/>
  </tileset>
  <layer name="Tile Layer 1" width="80" height="40">
   <data encoding="base64" compression="zlib">
    eJzt1zcOgDAUBFHC/e9MhUSBiLv8wDzJNWZkbDMMAAAAAAAAALoadwYAAE/snSnKMX33KlZRZ22XhpH9OjSM7udqqNhjrj4nQpf98E17x3OrnUOV/9UyNOzQL7Jh1X5Zvvsu+9Adyjkr1l+1hso7jLJfpYYq6n5/a+jop7zfZ9flPZwyr4M5wRyqWtu5+x2tlazr6sy23dO5ZtlzVXdo11DO22EB5OQBJw==
   </data>
  </layer>
+ <objectgroup name="Objects">
+  <object id="1" x="0" y="1248" width="1280" height="32"/>
+  <object id="2" x="928" y="1248">
+   <polygon points="0,0 96,-96 96,0"/>
+  </object>
+  <object id="4" x="1024" y="1152" width="32" height="96"/>
+  <object id="5" x="512" y="1088" width="448" height="32"/>
+  <object id="6" x="0" y="960" width="544" height="32"/>
+  <object id="7" x="512" y="992" width="32" height="96"/>
+  <object id="8" x="544" y="960">
+   <polygon points="0,0 128,128 0,128"/>
+  </object>
+ </objectgroup>
 </map>

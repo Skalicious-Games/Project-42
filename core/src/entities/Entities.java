@@ -68,7 +68,6 @@ public class Entities {
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = shape;
 		fixtureDef.density = 1f;
-		fixtureDef.restitution = 0.5f;
 		Fixture fixture = body.createFixture(fixtureDef);
 		
 		shape.dispose();
@@ -106,4 +105,26 @@ public class Entities {
 		return entity;
 	}
 	
+	public static Entity invisiblePlatform (float x, float y, float ts, World world) {
+		Entity entity = new Entity();
+		
+		BodyDef bodyDef = new BodyDef();
+		bodyDef.type = BodyDef.BodyType.StaticBody;
+		bodyDef.position.set(x / PIXELS_TO_METERS, y  / PIXELS_TO_METERS);
+		Body body = world.createBody(bodyDef);
+		
+		PolygonShape shape = new PolygonShape();
+		shape.setAsBox(ts / 2 / PIXELS_TO_METERS, ts / 2 / PIXELS_TO_METERS);
+		
+		FixtureDef fixtureDef = new FixtureDef();
+		fixtureDef.shape = shape;
+		fixtureDef.friction = .5f;
+		Fixture fixture = body.createFixture(fixtureDef);
+		
+		shape.dispose();
+		
+		entity.add(new BodyComponent(body, fixture));
+		
+		return entity;
+	}
 }
