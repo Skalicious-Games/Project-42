@@ -54,7 +54,7 @@ public class Box2DRenderSystem extends EntitySystem {
 		world.step(1f/60f, 6, 2);
 		
 		//Clear screen then update
-		Gdx.gl.glClearColor(0, 0, 0, 1);
+		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		batch.setProjectionMatrix(camera.combined);

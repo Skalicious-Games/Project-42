@@ -8,22 +8,21 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 
+import components.BodyComponent;
 import components.PlayerInputComponent;
-import components.PositionComponent;
-import components.VelocityComponent;
 import entities.Entities;
 
-public class PlayerInputSystem extends IteratingSystem {
-	
+public class PlayerInputSystem extends IteratingSystem {	
 	Engine engine;
 	World world;
 	
 	int dir = 1;
+	float max = 3f;
 	
-	private ComponentMapper<VelocityComponent> vm = ComponentMapper.getFor(VelocityComponent.class);
-	private ComponentMapper<PositionComponent> pm = ComponentMapper.getFor(PositionComponent.class);
+	private ComponentMapper<BodyComponent> bm = ComponentMapper.getFor(BodyComponent.class);
 	
 	public PlayerInputSystem(Engine e, World world) {
 		super(Family.all(PlayerInputComponent.class).get());
@@ -33,30 +32,26 @@ public class PlayerInputSystem extends IteratingSystem {
 
 	@Override
 	protected void processEntity(Entity entity, float deltaTime) {
-		VelocityComponent velocity = vm.get(entity);
-		PositionComponent position = pm.get(entity);
+		BodyComponent body = bm.get(entity);
+		Vector2 pos = body.body.getPosition();
+		Vector2 vel = body.body.getLinearVelocity();
 		
-		float speed = 300.0f;
+		if (Gdx.input.isKeyPressed(Input.Keys.D) && vel.x < max) {
+			body.body.applyLinearImpulse(.75f, 0, pos.x, pos.y, true);
+		}
+		else if (Gdx.input.isKeyPressed(Input.Keys.A) && vel.x > -max) {
+			body.body.applyLinearImpulse(-.75f, 0, pos.x, pos.y, true);
+		}
 		
-		if (Gdx.input.isKeyPressed(Input.Keys.D)) {
+		if (vel.x > 0) {
 			dir = 1;
 		}
-		else if (Gdx.input.isKeyPressed(Input.Keys.A)) {
+		else if (vel.x < 0) {
 			dir = -1;
 		}
-		else {
-			speed = 0;
-		}
-		
-		if (Gdx.input.isKeyPressed(Input.Keys.D) && Gdx.input.isKeyPressed(Input.Keys.A)) {
-			speed = 0;
-		}
-		
-		velocity.x = dir * speed;
 		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-			Entity bullet = Entities.bullet(position.x + 40, position.y + 20, new Texture(Gdx.files.local("bullet_20x10.png")), world);
-			engine.addEntity(bullet);
+			
 		}
 	}
 

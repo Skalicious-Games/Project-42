@@ -24,11 +24,11 @@ import static variables.Variables.PIXELS_TO_METERS;
 
 public class Entities {
 	
-	public static Entity bullet (float x, float y, Texture texture, World world) {
+	public static Entity bullet (float x, float y, Texture texture, World world, int dir) {
 		Entity entity = new Entity();
 		
 		entity.add(new SpriteComponent(texture, x, y));
-		//Add body component
+		SpriteComponent sprite = entity.getComponent(SpriteComponent.class);
 		
 		return entity;
 	}
@@ -74,6 +74,7 @@ public class Entities {
 		shape.dispose();
 		
 		entity.add(new BodyComponent(body, fixture));
+		entity.add(new PlayerInputComponent());
 		
 		return entity;
 	}
