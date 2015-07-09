@@ -11,6 +11,14 @@ package entities;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.physics.box2d.Fixture;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.World;
 
 import components.*;
 
@@ -57,6 +65,37 @@ public class Entities {
 		entity.add(new RenderPriorityComponent(priority));
 		entity.add(new RenderComponent());
 		entity.add(new PlayerInputComponent());
+		
+		return entity;
+	}
+	
+	public static Entity box2DPlayer (float x, float y, Texture texture, World world) {
+		Entity entity = new Entity();
+		
+		entity.add(new PositionComponent(x, y));
+		System.out.println("x = " + x + " y = " + y);
+		entity.add(new SpriteComponent(texture));
+		
+		//Create Box2D Body
+		BodyDef bodyDef = new BodyDef();
+		bodyDef.type = BodyDef.BodyType.DynamicBody;
+		bodyDef.position.set(x, y);
+		Body body = world.createBody(bodyDef);
+		
+		PolygonShape shape = new PolygonShape();
+		Sprite sprite = new Sprite(texture);
+		shape.setAsBox(sprite.getWidth() / 2, sprite.getHeight() / 2);
+		
+		FixtureDef fixtureDef = new FixtureDef();
+		fixtureDef.shape = shape;
+		fixtureDef.density = 1f;
+		Fixture fixture = body.createFixture(fixtureDef);
+		
+		shape.dispose();
+		
+		entity.add(new Box2DBodyComponent(body, fixture));
+		entity.add(new RenderComponent());
+		body.setUserData(entity);
 		
 		return entity;
 	}

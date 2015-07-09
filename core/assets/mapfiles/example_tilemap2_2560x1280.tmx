@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-up" width="80" height="40" tilewidth="32" tileheight="32" nextobjectid="9">
+ <tileset firstgid="1" name="practicetileset" tilewidth="1" tileheight="1"/>
+ <tileset firstgid="1" name="practicetileset" tilewidth="32" tileheight="32">
+  <image source="practicetileset.PNG" width="96" height="32"/>
+ </tileset>
+ <objectgroup name="Objects">
+  <object id="1" x="2" y="1246" width="2558" height="36"/>
+  <object id="2" x="0" y="0" width="30" height="1240"/>
+  <object id="3" x="2496" y="2" width="62" height="1244"/>
+ </objectgroup>
+ <layer name="Tiles" width="80" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt0LENACAMwDD6/9OsrBBGW8oDmcWLOeKef41/jX+Nf41/jX+Nf41/jX+Nf41/jX+Nf41/jX+Nf41/jX+Nf41/jX+Nf41/jX+Nf41/jX+Nf41/jX+Nf41/jX+Nf41/jX+Nf83oSxsE6ADG
+  </data>
+ </layer>
+</map>

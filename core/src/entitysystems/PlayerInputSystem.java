@@ -18,6 +18,8 @@ public class PlayerInputSystem extends IteratingSystem {
 	
 	Engine engine;
 	
+	int dir = 1;
+	
 	private ComponentMapper<VelocityComponent> vm = ComponentMapper.getFor(VelocityComponent.class);
 	private ComponentMapper<PositionComponent> pm = ComponentMapper.getFor(PositionComponent.class);
 	
@@ -31,7 +33,6 @@ public class PlayerInputSystem extends IteratingSystem {
 		VelocityComponent velocity = vm.get(entity);
 		PositionComponent position = pm.get(entity);
 		
-		int dir = 1; //1 is right, -1 is left
 		float speed = 300.0f;
 		
 		if (Gdx.input.isKeyPressed(Input.Keys.D)) {
