@@ -11,6 +11,7 @@ package entities;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Fixture;
@@ -24,11 +25,33 @@ import static variables.Variables.PIXELS_TO_METERS;
 
 public class Entities {
 	
-	public static Entity bullet (float x, float y, Texture texture, World world, int dir) {
+	public static Entity bullet (float x, float y, Texture texture, World world, float x2, float y2) {
 		Entity entity = new Entity();
 		
 		entity.add(new SpriteComponent(texture, x, y));
 		SpriteComponent sprite = entity.getComponent(SpriteComponent.class);
+		sprite.sprite.setRotation((float) Math.toDegrees((y2 - y * PIXELS_TO_METERS)/(x2 - x * PIXELS_TO_METERS)));
+		float mag = (float) Math.pow((Math.pow(x2 - (x * PIXELS_TO_METERS), 2) + Math.pow(y2 - (y * PIXELS_TO_METERS), 2)), 0.5);
+		float vX = (x2 - x * PIXELS_TO_METERS) / (mag);
+		float vY = (y2 - y * PIXELS_TO_METERS) / (mag);
+		
+		//Create box2d body
+		BodyDef bodyDef = new BodyDef();
+		bodyDef.type = BodyDef.BodyType.KinematicBody;
+		bodyDef.position.set(x + 1, y + 1);
+		Body body = world.createBody(bodyDef);
+		body.setLinearVelocity(vX * 5f, vY * 5f);
+		
+		PolygonShape shape = new PolygonShape();
+		shape.setAsBox(sprite.sprite.getWidth() / 2 / PIXELS_TO_METERS, sprite.sprite.getHeight() / 2 / PIXELS_TO_METERS);
+		
+		FixtureDef fixtureDef = new FixtureDef();
+		fixtureDef.shape = shape;
+		Fixture fixture = body.createFixture(fixtureDef);
+		
+		shape.dispose();
+		
+		entity.add(new BodyComponent(body, fixture));
 		
 		return entity;
 	}

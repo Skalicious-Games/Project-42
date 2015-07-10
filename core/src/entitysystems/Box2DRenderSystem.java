@@ -24,6 +24,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 
 import components.BodyComponent;
+import components.PlayerInputComponent;
 import components.PositionComponent;
 import components.RenderComponent;
 import components.SpriteComponent;
@@ -32,6 +33,7 @@ import static variables.Variables.PIXELS_TO_METERS;
 
 public class Box2DRenderSystem extends EntitySystem {
 	private ImmutableArray<Entity> entities;
+	private ImmutableArray<Entity> players;
 	private World world;
 	private OrthographicCamera camera;
 	private SpriteBatch batch;
@@ -50,15 +52,21 @@ public class Box2DRenderSystem extends EntitySystem {
 	
 	public void addedToEngine(Engine engine) {
 		entities = engine.getEntitiesFor(Family.all(SpriteComponent.class, BodyComponent.class).get());
+		players = engine.getEntitiesFor(Family.all(PlayerInputComponent.class).get());
 	}
 	
 	public void update (float deltaTime) {
+		for (Entity player : players) {
+			BodyComponent body = bm.get(player);
+			camera.position.set(body.body.getPosition().x * PIXELS_TO_METERS, body.body.getPosition().y * PIXELS_TO_METERS, 0);
+		}
 		camera.update();
 
 		//Update box2d world
 		world.step(deltaTime, 6, 2);
 		
 		//Clear screen then update
+		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.setProjectionMatrix(camera.combined);
 		

@@ -37,6 +37,7 @@ public class PlayerInputSystem extends IteratingSystem {
 		Vector2 vel = body.body.getLinearVelocity();
 		
 		
+		//Move player left or right
 		if (Gdx.input.isKeyPressed(Input.Keys.D) && Gdx.input.isKeyPressed(Input.Keys.A)) {
 			body.body.setLinearVelocity(0f, vel.y);
 		}
@@ -53,6 +54,7 @@ public class PlayerInputSystem extends IteratingSystem {
 			body.body.setLinearVelocity(0f, vel.y);
 		}
 		
+		//Direction player sprite should be facing
 		if (vel.x > 0) {
 			dir = 1;
 		}
@@ -60,8 +62,16 @@ public class PlayerInputSystem extends IteratingSystem {
 			dir = -1;
 		}
 		
+		//Jump Player
 		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
 			body.body.applyLinearImpulse(0f, 1f, pos.x, pos.y, true);
+		}
+		
+		//Mouse input
+		if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+			Entity bullet = Entities.bullet(body.body.getPosition().x, body.body.getPosition().y, 
+					new Texture(Gdx.files.local("bullet_20x10.png")), world, Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY());
+			engine.addEntity(bullet);
 		}
 	}
 
