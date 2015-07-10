@@ -32,13 +32,14 @@ public class MapLoader2 {
 			float width = object.getProperties().get("width", Float.class);
 			float height = object.getProperties().get("height", Float.class);
 			
-			bodyDef.position.set(x / PIXELS_TO_METERS, y / PIXELS_TO_METERS);
+			bodyDef.position.set((x + width / 2) / PIXELS_TO_METERS, (y + height / 2) / PIXELS_TO_METERS);
 			
 			Body body = world.createBody(bodyDef);
 			FixtureDef fDef = new FixtureDef();
 			PolygonShape shape = new PolygonShape();
-			shape.setAsBox(width / PIXELS_TO_METERS, height / PIXELS_TO_METERS);
+			shape.setAsBox(width / PIXELS_TO_METERS / 2 , height / PIXELS_TO_METERS / 2);
 			fDef.shape = shape;
+			fDef.friction = 0.5f;
 			body.createFixture(fDef);
 			bodies.add(body);
 			shape.dispose();
