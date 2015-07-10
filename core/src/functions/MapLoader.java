@@ -32,7 +32,8 @@ import components.BodyComponent;
 import static variables.Variables.PIXELS_TO_METERS;
 
 public class MapLoader {
-    // The pixels per tile. If your tiles are 16x16, this is set to 16f
+    private static final BodyDef BodyDef = null;
+	// The pixels per tile. If your tiles are 16x16, this is set to 16f
     private static float ppt = 0f;
 
     public static Array<Body> buildShapes(Map map, float pixels, World world, Engine engine) {
@@ -48,9 +49,10 @@ public class MapLoader {
             }
 
             Shape shape;
+            BodyDef bd = new BodyDef();
 
             if (object instanceof RectangleMapObject) {
-                shape = getRectangle((RectangleMapObject)object);
+                shape = getRectangle((RectangleMapObject)object, bd);
             }
             else if (object instanceof PolygonMapObject) {
                 shape = getPolygon((PolygonMapObject)object);
@@ -65,10 +67,10 @@ public class MapLoader {
                 continue;
             }
 
-            BodyDef bd = new BodyDef();
             bd.type = BodyType.StaticBody;
             Body body = world.createBody(bd);
             Fixture fixture = body.createFixture(shape, 1);
+            fixture.setFriction(.5f);
 
             bodies.add(body);
        
@@ -77,18 +79,24 @@ public class MapLoader {
         return bodies;
     }
 
-    private static PolygonShape getRectangle(RectangleMapObject rectangleObject) {
+    private static PolygonShape getRectangle(RectangleMapObject rectangleObject, BodyDef bd) {
+    	float x = rectangleObject.getProperties().get("x", Float.class);
+		float y = rectangleObject.getProperties().get("y", Float.class);
+		float width = rectangleObject.getProperties().get("width", Float.class);
+		float height = rectangleObject.getProperties().get("height", Float.class);
+		
+    	bd.position.set((x + width / 2) / PIXELS_TO_METERS, (y + height / 2) / PIXELS_TO_METERS);
         Rectangle rectangle = rectangleObject.getRectangle();
         PolygonShape polygon = new PolygonShape();
-        polygon.setAsBox(rectangle.width / PIXELS_TO_METERS, rectangle.height / PIXELS_TO_METERS);
+        polygon.setAsBox(width / PIXELS_TO_METERS / 2, height / PIXELS_TO_METERS / 2);
         return polygon;
     }
 
     private static CircleShape getCircle(CircleMapObject circleObject) {
         Circle circle = circleObject.getCircle();
         CircleShape circleShape = new CircleShape();
-        circleShape.setRadius(circle.radius / ppt);
-        circleShape.setPosition(new Vector2(circle.x / ppt, circle.y / ppt));
+        circleShape.setRadius(circle.radius / PIXELS_TO_METERS);
+        circleShape.setPosition(new Vector2(circle.x / PIXELS_TO_METERS, circle.y / PIXELS_TO_METERS));
         return circleShape;
     }
 
@@ -99,8 +107,8 @@ public class MapLoader {
         float[] worldVertices = new float[vertices.length];
 
         for (int i = 0; i < vertices.length; ++i) {
-            System.out.println(vertices[i]);
-            worldVertices[i] = vertices[i] / ppt;
+            //System.out.println(vertices[i]);
+            worldVertices[i] = vertices[i] / PIXELS_TO_METERS;
         }
 
         polygon.set(worldVertices);

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="left-down" width="80" height="40" tilewidth="32" tileheight="32" nextobjectid="35">
+<map version="1.0" orientation="orthogonal" renderorder="left-down" width="80" height="40" tilewidth="32" tileheight="32" nextobjectid="38">
  <tileset firstgid="1" name="practicetileset" tilewidth="1" tileheight="1"/>
  <tileset firstgid="1" name="practicetileset" tilewidth="32" tileheight="32">
   <image source="practicetileset.PNG" width="96" height="32"/>
  </tileset>
  <layer name="Tiles" width="80" height="40">
   <data encoding="base64" compression="zlib">
-   eJzt1jEKwDAQxMD4/5/OA1Ity/kU0IB7sYXt86hxtgN+zv067tdxv477ddyv434d9+u4X8f9Ou7Xcb+O+3Xcr+N+HffruF+Hsh+lI0XppnSkKN2UjhSlm9KRonRTOlKUbkpHitJN6UhRuikdKUo3pSNF6aZ0pCjdlI4UpZvSkaJ0UzpSJzjTHX9E6aZ0pCjdlI4UpZvSkdrsvnm/Ttnqvv0+Tdno3njfp9zu3vofTUn+f57veQFD9gCp
+   eJzt1EEKhEAQBEGH/f+f/YCuloVODmRA35M69NjUGLMDFud+HffruF/H/Tru13G/jvt13K/jfh3367hfx/067tdxv477ddyvQ9mP0pGidFM6UpRuSkeK0k3pSFG6KR0pSjelI0XppnSkKN2UjhSlm9KRonRTOlKUbkpHitJN6UhRuikdqRHc2x0ronRTOlKUbkpHitJN6UjN6v5t3/7Xt8zoPtrO/e452879rv3bbuX9vOe3A3MeALU=
   </data>
  </layer>
  <objectgroup name="Objects">
@@ -14,9 +14,9 @@
   <object id="27" x="0" y="1248" width="2560" height="32"/>
   <object id="29" x="32" y="992" width="320" height="32"/>
   <object id="30" x="1088" y="576" width="32" height="672"/>
-  <object id="31" x="992" y="1120" width="96" height="128"/>
-  <object id="32" x="960" y="1152" width="32" height="96"/>
-  <object id="33" x="928" y="1184" width="32" height="64"/>
-  <object id="34" x="896" y="1216" width="32" height="32"/>
+  <object id="35" x="864" y="1248">
+   <polygon points="0,0 128,-128 128,0"/>
+  </object>
+  <object id="37" x="992" y="1120" width="96" height="128"/>
  </objectgroup>
 </map>

@@ -36,11 +36,21 @@ public class PlayerInputSystem extends IteratingSystem {
 		Vector2 pos = body.body.getPosition();
 		Vector2 vel = body.body.getLinearVelocity();
 		
-		if (Gdx.input.isKeyPressed(Input.Keys.D) && vel.x < max) {
-			body.body.applyLinearImpulse(.75f, 0, pos.x, pos.y, true);
+		
+		if (Gdx.input.isKeyPressed(Input.Keys.D) && Gdx.input.isKeyPressed(Input.Keys.A)) {
+			body.body.setLinearVelocity(0f, vel.y);
+		}
+		else if (Gdx.input.isKeyPressed(Input.Keys.D) && vel.x < max) {
+			body.body.setLinearVelocity(4f, vel.y);
 		}
 		else if (Gdx.input.isKeyPressed(Input.Keys.A) && vel.x > -max) {
-			body.body.applyLinearImpulse(-.75f, 0, pos.x, pos.y, true);
+			body.body.setLinearVelocity(-4f, vel.y);
+		}
+		else if (!Gdx.input.isKeyPressed(Input.Keys.D) && !Gdx.input.isKeyPressed(Input.Keys.A)) {
+			body.body.setLinearVelocity(0f, vel.y);
+		}
+		else if (Gdx.input.isKeyPressed(Input.Keys.D) && Gdx.input.isKeyPressed(Input.Keys.A)) {
+			body.body.setLinearVelocity(0f, vel.y);
 		}
 		
 		if (vel.x > 0) {

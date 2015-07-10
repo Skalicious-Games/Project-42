@@ -46,8 +46,9 @@ public class EntityManager {
 	public EntityManager(Engine e, SpriteBatch batch) {
 		engine = e;
 		
+		//tileMap = new TmxMapLoader().load("mapfiles/example_tilemap3_1280x704.tmx");
 		tileMap = new TmxMapLoader().load("mapfiles/example_tilemap2_2560x1280.tmx");
-		MapLoader2.buildShapes(tileMap, world, e);
+		MapLoader.buildShapes(tileMap, 32f, world, e);
 		tmRenderer = new OrthogonalTiledMapRenderer(tileMap);
 		
 		//Create all needed systems
