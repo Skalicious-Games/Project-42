@@ -32,6 +32,7 @@ import entitysystems.MovementSystem;
 import entitysystems.PlayerInputSystem;
 import entitysystems.RenderSystem;
 import functions.MapLoader;
+import functions.MapLoader2;
 
 public class EntityManager {
 	private Engine engine;
@@ -45,8 +46,8 @@ public class EntityManager {
 	public EntityManager(Engine e, SpriteBatch batch) {
 		engine = e;
 		
-		tileMap = new TmxMapLoader().load("mapfiles/example_tilemap_2560x1280.tmx");
-		MapLoader.buildShapes(tileMap, 32f, world, e);
+		tileMap = new TmxMapLoader().load("mapfiles/example_tilemap3_1280x704.tmx");
+		MapLoader2.buildShapes(tileMap, world, e);
 		tmRenderer = new OrthogonalTiledMapRenderer(tileMap);
 		
 		//Create all needed systems

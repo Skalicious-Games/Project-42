@@ -36,7 +36,7 @@ public class Box2DRenderSystem extends EntitySystem {
 	private OrthographicCamera camera;
 	private SpriteBatch batch;
 	private OrthogonalTiledMapRenderer tmRenderer;
-	
+
 	private ComponentMapper<SpriteComponent> sm = ComponentMapper.getFor(SpriteComponent.class);
 	private ComponentMapper<BodyComponent> bm = ComponentMapper.getFor(BodyComponent.class);
 	
@@ -56,19 +56,18 @@ public class Box2DRenderSystem extends EntitySystem {
 		camera.update();
 
 		//Update box2d world
-		world.step(1f/60f, 6, 2);
+		world.step(deltaTime, 6, 2);
 		
 		//Clear screen then update
-		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.setProjectionMatrix(camera.combined);
 		
 		//Draw tilemap
 		tmRenderer.setView(camera);
 		tmRenderer.render();
-		
-		batch.begin();
 
+		batch.begin();
+		
 		for (Entity entity : entities) {
 			SpriteComponent sprite = sm.get(entity);
 			BodyComponent body = bm.get(entity);;

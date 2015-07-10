@@ -51,7 +51,7 @@ public class PlayerInputSystem extends IteratingSystem {
 		}
 		
 		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-			
+			body.body.applyLinearImpulse(0f, 1f, pos.x, pos.y, true);
 		}
 	}
 

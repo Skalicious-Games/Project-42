@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-up" width="40" height="22" tilewidth="32" tileheight="32" nextobjectid="6">
+ <tileset firstgid="1" name="practicetileset" tilewidth="32" tileheight="32">
+  <image source="practicetileset.PNG" width="96" height="32"/>
+ </tileset>
+ <layer name="Collision Tiles" width="40" height="22">
+  <data encoding="base64" compression="zlib">
+   eJzt18EJADAMw0Bn/6W7QkEtNVSCfM19M0mm/FrTx9LH0sfSx9LH0sfSx/rVd2pXX8fOrd3Xf8/OLVatAIE=
+  </data>
+ </layer>
+ <objectgroup name="Objects">
+  <object id="1" x="0" y="672" width="1280" height="32"/>
+  <object id="2" x="0" y="0" width="32" height="672"/>
+  <object id="3" x="1248" y="0" width="32" height="672"/>
+  <object id="4" x="32" y="0" width="1216" height="32"/>
+  <object id="5" x="672" y="544" width="64" height="128"/>
+ </objectgroup>
+</map>
