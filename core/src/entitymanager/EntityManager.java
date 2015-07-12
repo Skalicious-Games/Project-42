@@ -28,6 +28,7 @@ import com.badlogic.gdx.physics.box2d.World;
 
 import entities.Entities;
 import entitysystems.Box2DRenderSystem;
+import entitysystems.DebugRenderSystem;
 import entitysystems.MovementSystem;
 import entitysystems.PlayerInputSystem;
 import entitysystems.RenderSystem;
@@ -37,6 +38,7 @@ import functions.MapLoader2;
 public class EntityManager {
 	private Engine engine;
 	public OrthogonalTiledMapRenderer tmRenderer;
+	public Box2DDebugRenderer debugRenderer;
 	public TiledMap tileMap;
 	
 	private float deltaTime = 0;
@@ -46,18 +48,24 @@ public class EntityManager {
 	public EntityManager(Engine e, SpriteBatch batch) {
 		engine = e;
 		
+		//load tilemap and create box2d bodies for collidable objects
 		//tileMap = new TmxMapLoader().load("mapfiles/example_tilemap3_1280x704.tmx");
 		tileMap = new TmxMapLoader().load("mapfiles/example_tilemap_2560x1280.tmx");
 		MapLoader.buildShapes(tileMap, 32f, world, e);
+		
+		//Create renderer
 		tmRenderer = new OrthogonalTiledMapRenderer(tileMap);
+		debugRenderer = new Box2DDebugRenderer();
 		
 		//Create all needed systems
 		PlayerInputSystem pis = new PlayerInputSystem(e, world);
-		Box2DRenderSystem brs = new Box2DRenderSystem(world, batch, tmRenderer);
+		//Box2DRenderSystem brs = new Box2DRenderSystem(world, batch, tmRenderer);
+		DebugRenderSystem drs = new DebugRenderSystem(world, debugRenderer); //use only 1 render system at a time
 		
 		//Add all systems to engine
 		engine.addSystem(pis);
-		engine.addSystem(brs);
+		//engine.addSystem(brs);
+		engine.addSystem(drs);
 
 		//Create box2d Player		
 		Entity player = Entities.box2DPlayer(640, 360, new Texture(Gdx.files.local("player_40x40.png")), world);

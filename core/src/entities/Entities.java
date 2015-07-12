@@ -14,6 +14,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
@@ -34,6 +35,7 @@ public class Entities {
 		float mag = (float) Math.pow((Math.pow(x2 - (x * PIXELS_TO_METERS), 2) + Math.pow(y2 - (y * PIXELS_TO_METERS), 2)), 0.5);
 		float vX = (x2 - x * PIXELS_TO_METERS) / (mag);
 		float vY = (y2 - y * PIXELS_TO_METERS) / (mag);
+		System.out.println(vX+ " " + vY);
 		
 		//Create box2d body
 		BodyDef bodyDef = new BodyDef();
@@ -47,6 +49,7 @@ public class Entities {
 		
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = shape;
+		fixtureDef.isSensor = true;
 		Fixture fixture = body.createFixture(fixtureDef);
 		
 		shape.dispose();
@@ -110,6 +113,7 @@ public class Entities {
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = shape;
 		fixtureDef.density = 1f;
+		fixtureDef.restitution = 0f;
 		Fixture fixture = body.createFixture(fixtureDef);
 		
 		shape.dispose();
