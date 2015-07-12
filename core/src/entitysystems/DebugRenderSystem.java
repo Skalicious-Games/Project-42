@@ -37,7 +37,7 @@ public class DebugRenderSystem extends EntitySystem {
 		this.renderer = renderer;
 		
 		camera = new OrthographicCamera();
-		camera.setToOrtho(false, Gdx.graphics.getWidth() / PIXELS_TO_METERS, Gdx.graphics.getHeight() / PIXELS_TO_METERS);
+		camera.setToOrtho(false, Gdx.graphics.getWidth() / PIXELS_TO_METERS * 2, Gdx.graphics.getHeight() / PIXELS_TO_METERS * 2);
 	}
 	
 	public void addedToEngine(Engine engine) {
