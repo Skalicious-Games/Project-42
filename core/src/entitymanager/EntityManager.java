@@ -61,7 +61,9 @@ public class EntityManager {
 
 		//Create box2d Player		
 		Entity player = Entities.box2DPlayer(640, 360, new Texture(Gdx.files.local("player_40x40.png")), world);
-		engine.addEntity(player);		
+		Entity enemy = Entities.enemy(700, 500, new Texture(Gdx.files.local("player_40x40.png")), world);
+		engine.addEntity(player);
+		engine.addEntity(enemy);
 		
 	}
 

@@ -56,11 +56,30 @@ public class Entities {
 		return entity;
 	}
 	
-	public static Entity enemy (float x, float y, Texture texture) {
+	public static Entity enemy (float x, float y, Texture texture, World world) {
 		Entity entity = new Entity();
 		
 		entity.add(new SpriteComponent(texture, x, y));
+		SpriteComponent sprite = entity.getComponent(SpriteComponent.class);
+
 		//Add body component
+		BodyDef bodyDef = new BodyDef();
+		bodyDef.type = BodyDef.BodyType.DynamicBody;
+		bodyDef.position.set(x / PIXELS_TO_METERS, y  / PIXELS_TO_METERS);
+		Body body = world.createBody(bodyDef);
+		
+		PolygonShape shape = new PolygonShape();
+		shape.setAsBox(sprite.sprite.getWidth() / 2 / PIXELS_TO_METERS, sprite.sprite.getHeight() / 2 / PIXELS_TO_METERS);
+		
+		FixtureDef fixtureDef = new FixtureDef();
+		fixtureDef.shape = shape;
+		fixtureDef.density = 1f;
+		Fixture fixture = body.createFixture(fixtureDef);
+		
+		shape.dispose();
+		
+		entity.add(new BodyComponent(body, fixture));
+		entity.add(new AIComponent());
 		
 		return entity;
 	}
