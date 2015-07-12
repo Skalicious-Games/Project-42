@@ -34,6 +34,7 @@ public class Entities {
 		float mag = (float) Math.pow((Math.pow(x2 - (x * PIXELS_TO_METERS), 2) + Math.pow(y2 - (y * PIXELS_TO_METERS), 2)), 0.5);
 		float vX = (x2 - x * PIXELS_TO_METERS) / (mag);
 		float vY = (y2 - y * PIXELS_TO_METERS) / (mag);
+		System.out.println(vX+ " " + vY);
 		
 		//Create box2d body
 		BodyDef bodyDef = new BodyDef();
@@ -91,6 +92,7 @@ public class Entities {
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = shape;
 		fixtureDef.density = 1f;
+		fixtureDef.restitution = 0f;
 		Fixture fixture = body.createFixture(fixtureDef);
 		
 		shape.dispose();
