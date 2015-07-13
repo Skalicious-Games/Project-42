@@ -17,6 +17,7 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 
+import box2dLight.RayHandler;
 import components.BodyComponent;
 import components.PlayerInputComponent;
 import components.SpriteComponent;
@@ -55,6 +56,6 @@ public class DebugRenderSystem extends EntitySystem {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		//Render bodies
-		renderer.render(world, camera.combined);
+		renderer.render(world, camera.combined);		
 	}
 }

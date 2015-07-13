@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -26,6 +27,8 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
+import box2dLight.PointLight;
+import box2dLight.RayHandler;
 import entities.Entities;
 import entitysystems.Box2DRenderSystem;
 import entitysystems.DebugRenderSystem;
@@ -40,6 +43,7 @@ public class EntityManager {
 	public OrthogonalTiledMapRenderer tmRenderer;
 	public Box2DDebugRenderer debugRenderer;
 	public TiledMap tileMap;
+	public RayHandler rayHandler;
 	
 	private float deltaTime = 0;
 	
@@ -47,6 +51,9 @@ public class EntityManager {
 	
 	public EntityManager(Engine e, SpriteBatch batch) {
 		engine = e;
+		
+		//create light ray handler
+		rayHandler = new RayHandler(world);
 		
 		//load tilemap and create box2d bodies for collidable objects
 		//tileMap = new TmxMapLoader().load("mapfiles/example_tilemap3_1280x704.tmx");
@@ -59,17 +66,19 @@ public class EntityManager {
 		
 		//Create all needed systems
 		PlayerInputSystem pis = new PlayerInputSystem(e, world);
-		//Box2DRenderSystem brs = new Box2DRenderSystem(world, batch, tmRenderer);
+		Box2DRenderSystem brs = new Box2DRenderSystem(world, batch, tmRenderer, rayHandler);
 		DebugRenderSystem drs = new DebugRenderSystem(world, debugRenderer); //use only 1 render system at a time
 		
 		//Add all systems to engine
 		engine.addSystem(pis);
-		//engine.addSystem(brs);
+		//engine.addSystem(brs); //only add one render system at a time
 		engine.addSystem(drs);
 
 		//Create box2d Player		
 		Entity player = Entities.box2DPlayer(640, 360, new Texture(Gdx.files.local("player_40x40.png")), world);
 		engine.addEntity(player);		
+		
+		new PointLight(rayHandler, 200, Color.CYAN, 100, 500, 500);
 		
 	}
 

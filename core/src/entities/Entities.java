@@ -31,18 +31,18 @@ public class Entities {
 		
 		entity.add(new SpriteComponent(texture, x, y));
 		SpriteComponent sprite = entity.getComponent(SpriteComponent.class);
+		//Set bullet direction based on player click
 		sprite.sprite.setRotation((float) Math.toDegrees((y2 - y * PIXELS_TO_METERS)/(x2 - x * PIXELS_TO_METERS)));
-		float mag = (float) Math.pow((Math.pow(x2 - (x * PIXELS_TO_METERS), 2) + Math.pow(y2 - (y * PIXELS_TO_METERS), 2)), 0.5);
-		float vX = (x2 - x * PIXELS_TO_METERS) / (mag);
-		float vY = (y2 - y * PIXELS_TO_METERS) / (mag);
-		System.out.println(vX+ " " + vY);
+		float mag = (float) Math.pow((Math.pow(x2 - (x * PIXELS_TO_METERS / 2), 2) + Math.pow(y2 - (y * PIXELS_TO_METERS / 2), 2)), 0.5);
+		float vX = (x2 - (x * PIXELS_TO_METERS / 2)) / (mag);
+		float vY = (y2 - (y * PIXELS_TO_METERS / 2)) / (mag);
 		
 		//Create box2d body
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyDef.BodyType.KinematicBody;
-		bodyDef.position.set(x + 1, y + 1);
+		bodyDef.position.set(x, y);
 		Body body = world.createBody(bodyDef);
-		body.setLinearVelocity(vX * 5f, vY * 5f);
+		body.setLinearVelocity(vX * 10f, vY * 10f);
 		
 		PolygonShape shape = new PolygonShape();
 		shape.setAsBox(sprite.sprite.getWidth() / 2 / PIXELS_TO_METERS, sprite.sprite.getHeight() / 2 / PIXELS_TO_METERS);
@@ -86,6 +86,7 @@ public class Entities {
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyDef.BodyType.DynamicBody;
 		bodyDef.position.set(x / PIXELS_TO_METERS, y  / PIXELS_TO_METERS);
+		bodyDef.fixedRotation = true;
 		Body body = world.createBody(bodyDef);
 		
 		PolygonShape shape = new PolygonShape();
@@ -122,7 +123,7 @@ public class Entities {
 		
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = shape;
-		fixtureDef.friction = .5f;
+		fixtureDef.friction = 0f;
 		Fixture fixture = body.createFixture(fixtureDef);
 		
 		shape.dispose();

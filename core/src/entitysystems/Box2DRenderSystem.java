@@ -23,6 +23,7 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 
+import box2dLight.RayHandler;
 import components.BodyComponent;
 import components.PlayerInputComponent;
 import components.PositionComponent;
@@ -38,14 +39,17 @@ public class Box2DRenderSystem extends EntitySystem {
 	private OrthographicCamera camera;
 	private SpriteBatch batch;
 	private OrthogonalTiledMapRenderer tmRenderer;
+	private RayHandler rayHandler;
 
 	private ComponentMapper<SpriteComponent> sm = ComponentMapper.getFor(SpriteComponent.class);
 	private ComponentMapper<BodyComponent> bm = ComponentMapper.getFor(BodyComponent.class);
 	
-	public Box2DRenderSystem (World world, SpriteBatch batch, OrthogonalTiledMapRenderer tmRenderer) {
+	public Box2DRenderSystem (World world, SpriteBatch batch, OrthogonalTiledMapRenderer tmRenderer, RayHandler rayHandler) {
 		this.world = world;
 		this.batch = batch;
 		this.tmRenderer = tmRenderer;
+		this.rayHandler = rayHandler;
+		
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		camera.setToOrtho(false);
 	}
@@ -86,6 +90,6 @@ public class Box2DRenderSystem extends EntitySystem {
                     sprite.sprite.getScaleX(), sprite.sprite.getScaleY(), sprite.sprite.getRotation());
 		}
 		batch.end();
-
+		
 	}
 }

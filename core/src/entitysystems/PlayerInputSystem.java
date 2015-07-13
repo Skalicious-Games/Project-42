@@ -21,6 +21,7 @@ public class PlayerInputSystem extends IteratingSystem {
 	
 	int dir = 1;
 	float max = 3f;
+	float bulletTimer = 0.5f;
 	
 	private ComponentMapper<BodyComponent> bm = ComponentMapper.getFor(BodyComponent.class);
 	
@@ -35,6 +36,7 @@ public class PlayerInputSystem extends IteratingSystem {
 		BodyComponent body = bm.get(entity);
 		Vector2 pos = body.body.getPosition();
 		Vector2 vel = body.body.getLinearVelocity();
+		bulletTimer += deltaTime;
 		
 		
 		//Move player left or right
@@ -69,9 +71,12 @@ public class PlayerInputSystem extends IteratingSystem {
 		
 		//Mouse input
 		if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
-			Entity bullet = Entities.bullet(body.body.getPosition().x, body.body.getPosition().y, 
-					new Texture(Gdx.files.local("bullet_20x10.png")), world, Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY());
-			engine.addEntity(bullet);
+			if (bulletTimer > 0.3) {
+				Entity bullet = Entities.bullet(body.body.getPosition().x, body.body.getPosition().y, 
+						new Texture(Gdx.files.local("bullet_20x10.png")), world, Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY());
+				engine.addEntity(bullet);
+				bulletTimer = 0;
+			}
 		}
 	}
 
