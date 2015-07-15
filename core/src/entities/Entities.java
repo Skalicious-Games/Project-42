@@ -40,7 +40,7 @@ public class Entities {
 		//Create box2d body
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyDef.BodyType.KinematicBody;
-		bodyDef.position.set(x + 1, y + 1);
+		bodyDef.position.set(x, y);
 		Body body = world.createBody(bodyDef);
 		body.setLinearVelocity(vX * 5f, vY * 5f);
 		

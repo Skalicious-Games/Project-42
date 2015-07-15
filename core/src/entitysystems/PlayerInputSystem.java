@@ -68,9 +68,13 @@ public class PlayerInputSystem extends IteratingSystem {
 		}
 		
 		//Mouse input
+		
+		int mouseX = Gdx.input.getX();
+		int mouseY = Gdx.input.getY();
+		
 		if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
 			Entity bullet = Entities.bullet(body.body.getPosition().x, body.body.getPosition().y, 
-					new Texture(Gdx.files.local("bullet_20x10.png")), world, Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY());
+					new Texture(Gdx.files.local("bullet_20x10.png")), world, mouseX, Gdx.graphics.getHeight() - mouseY);
 			engine.addEntity(bullet);
 		}
 	}

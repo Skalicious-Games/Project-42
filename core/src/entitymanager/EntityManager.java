@@ -27,6 +27,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
 import entities.Entities;
+import entitysystems.AIMovementSystem;
 import entitysystems.Box2DRenderSystem;
 import entitysystems.DebugRenderSystem;
 import entitysystems.MovementSystem;
@@ -61,15 +62,17 @@ public class EntityManager {
 		PlayerInputSystem pis = new PlayerInputSystem(e, world);
 		//Box2DRenderSystem brs = new Box2DRenderSystem(world, batch, tmRenderer);
 		DebugRenderSystem drs = new DebugRenderSystem(world, debugRenderer); //use only 1 render system at a time
+		AIMovementSystem aims = new AIMovementSystem(e, world);
 		
 		//Add all systems to engine
 		engine.addSystem(pis);
 		//engine.addSystem(brs);
 		engine.addSystem(drs);
+		engine.addSystem(aims);
 
 		//Create box2d Player		
 		Entity player = Entities.box2DPlayer(640, 360, new Texture(Gdx.files.local("player_40x40.png")), world);
-		Entity enemy = Entities.enemy(700, 500, new Texture(Gdx.files.local("player_40x40.png")), world);
+		Entity enemy = Entities.enemy(700, 500, new Texture(Gdx.files.local("enemy_40x40.png")), world);
 		engine.addEntity(player);
 		engine.addEntity(enemy);
 		
