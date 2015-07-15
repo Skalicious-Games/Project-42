@@ -33,12 +33,10 @@ public class DebugRenderSystem extends EntitySystem {
 	
 	private ComponentMapper<BodyComponent> bm = ComponentMapper.getFor(BodyComponent.class);
 	
-	public DebugRenderSystem(World world, Box2DDebugRenderer renderer) {
+	public DebugRenderSystem(World world, Box2DDebugRenderer renderer, OrthographicCamera camera) {
 		this.world = world;
 		this.renderer = renderer;
-		
-		camera = new OrthographicCamera();
-		camera.setToOrtho(false, Gdx.graphics.getWidth() / PIXELS_TO_METERS * 2, Gdx.graphics.getHeight() / PIXELS_TO_METERS * 2);
+		this.camera = camera;
 	}
 	
 	public void addedToEngine(Engine engine) {

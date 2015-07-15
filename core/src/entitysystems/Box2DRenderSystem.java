@@ -44,14 +44,12 @@ public class Box2DRenderSystem extends EntitySystem {
 	private ComponentMapper<SpriteComponent> sm = ComponentMapper.getFor(SpriteComponent.class);
 	private ComponentMapper<BodyComponent> bm = ComponentMapper.getFor(BodyComponent.class);
 	
-	public Box2DRenderSystem (World world, SpriteBatch batch, OrthogonalTiledMapRenderer tmRenderer, RayHandler rayHandler) {
+	public Box2DRenderSystem (World world, SpriteBatch batch, OrthogonalTiledMapRenderer tmRenderer, OrthographicCamera camera, RayHandler rayHandler) {
 		this.world = world;
 		this.batch = batch;
+		this.camera = camera;
 		this.tmRenderer = tmRenderer;
 		this.rayHandler = rayHandler;
-		
-		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		camera.setToOrtho(false);
 	}
 	
 	public void addedToEngine(Engine engine) {
@@ -60,10 +58,6 @@ public class Box2DRenderSystem extends EntitySystem {
 	}
 	
 	public void update (float deltaTime) {
-		for (Entity player : players) {
-			BodyComponent body = bm.get(player);
-			camera.position.set(body.body.getPosition().x * PIXELS_TO_METERS, body.body.getPosition().y * PIXELS_TO_METERS, 0);
-		}
 		camera.update();
 
 		//Update box2d world

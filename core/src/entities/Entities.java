@@ -32,10 +32,9 @@ public class Entities {
 		entity.add(new SpriteComponent(texture, x, y));
 		SpriteComponent sprite = entity.getComponent(SpriteComponent.class);
 		//Set bullet direction based on player click
-		sprite.sprite.setRotation((float) Math.toDegrees((y2 - y * PIXELS_TO_METERS)/(x2 - x * PIXELS_TO_METERS)));
-		float mag = (float) Math.pow((Math.pow(x2 - (x * PIXELS_TO_METERS / 2), 2) + Math.pow(y2 - (y * PIXELS_TO_METERS / 2), 2)), 0.5);
-		float vX = (x2 - (x * PIXELS_TO_METERS / 2)) / (mag);
-		float vY = (y2 - (y * PIXELS_TO_METERS / 2)) / (mag);
+		float mag = (float) Math.pow((Math.pow(x2 - (x * PIXELS_TO_METERS), 2) + Math.pow(y2 - (y * PIXELS_TO_METERS), 2)), 0.5);
+		float vX = (x2 - (x * PIXELS_TO_METERS)) / (mag);
+		float vY = (y2 - (y * PIXELS_TO_METERS)) / (mag);
 		
 		//Create box2d body
 		BodyDef bodyDef = new BodyDef();
