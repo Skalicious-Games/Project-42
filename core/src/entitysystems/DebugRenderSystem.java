@@ -17,6 +17,7 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 
+import box2dLight.RayHandler;
 import components.BodyComponent;
 import components.PlayerInputComponent;
 import components.SpriteComponent;
@@ -32,12 +33,10 @@ public class DebugRenderSystem extends EntitySystem {
 	
 	private ComponentMapper<BodyComponent> bm = ComponentMapper.getFor(BodyComponent.class);
 	
-	public DebugRenderSystem(World world, Box2DDebugRenderer renderer) {
+	public DebugRenderSystem(World world, Box2DDebugRenderer renderer, OrthographicCamera camera) {
 		this.world = world;
 		this.renderer = renderer;
-		
-		camera = new OrthographicCamera();
-		camera.setToOrtho(false, Gdx.graphics.getWidth() / PIXELS_TO_METERS * 2, Gdx.graphics.getHeight() / PIXELS_TO_METERS * 2);
+		this.camera = camera;
 	}
 	
 	public void addedToEngine(Engine engine) {
@@ -55,6 +54,6 @@ public class DebugRenderSystem extends EntitySystem {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		//Render bodies
-		renderer.render(world, camera.combined);
+		renderer.render(world, camera.combined);		
 	}
 }
