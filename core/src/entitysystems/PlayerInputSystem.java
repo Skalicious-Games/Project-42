@@ -7,6 +7,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
@@ -22,6 +23,8 @@ public class PlayerInputSystem extends IteratingSystem {
 	int dir = 1;
 	float max = 3f;
 	float bulletTimer = 0.5f;
+	
+	Sound shot = Gdx.audio.newSound(Gdx.files.local("SoundMorph - Future Weapons/Alliance-AssaultRifle_05-Single_Shot-04.wav"));
 	
 	private ComponentMapper<BodyComponent> bm = ComponentMapper.getFor(BodyComponent.class);
 	
@@ -71,11 +74,12 @@ public class PlayerInputSystem extends IteratingSystem {
 		
 		//Mouse input
 		if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
-			if (bulletTimer > 0.3) {
+			if (bulletTimer > 0.1) {
 				Entity bullet = Entities.bullet(body.body.getPosition().x, body.body.getPosition().y, 
 						new Texture(Gdx.files.local("bullet_20x10.png")), world, Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY());
 				engine.addEntity(bullet);
 				bulletTimer = 0;
+				shot.play();
 			}
 		}
 	}
