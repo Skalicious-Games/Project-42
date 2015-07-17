@@ -12,6 +12,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 
 import components.BodyComponent;
+import components.InventoryComponent;
 import components.PlayerInputComponent;
 import entities.Entities;
 
@@ -24,6 +25,7 @@ public class PlayerInputSystem extends IteratingSystem {
 	float bulletTimer = 0.5f;
 	
 	private ComponentMapper<BodyComponent> bm = ComponentMapper.getFor(BodyComponent.class);
+	private ComponentMapper<InventoryComponent> im = ComponentMapper.getFor(InventoryComponent.class);
 	
 	public PlayerInputSystem(Engine e, World world) {
 		super(Family.all(PlayerInputComponent.class).get());
@@ -81,6 +83,12 @@ public class PlayerInputSystem extends IteratingSystem {
 				engine.addEntity(bullet);
 				bulletTimer = 0;
 			}
+		}
+		
+		//Open Inventory
+		if (Gdx.input.isKeyPressed(Input.Keys.E)) {
+			InventoryComponent ic = im.get(entity);
+			ic.setOpen(true);
 		}
 	}
 

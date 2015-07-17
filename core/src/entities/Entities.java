@@ -119,6 +119,7 @@ public class Entities {
 		shape.dispose();
 		
 		entity.add(new BodyComponent(body, fixture));
+		entity.add(new InventoryComponent(10, 5));
 		entity.add(new PlayerInputComponent());
 		
 		return entity;
