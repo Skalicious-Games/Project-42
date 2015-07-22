@@ -2,6 +2,7 @@ package game;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
@@ -12,7 +13,7 @@ import com.badlogic.gdx.physics.box2d.World;
 
 import entitymanager.EntityManager;
 
-public class Game extends ApplicationAdapter {
+public class Project42 extends Game {
 	
 	SpriteBatch batch;
 	Texture img;

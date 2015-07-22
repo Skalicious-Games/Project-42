@@ -16,13 +16,14 @@ import com.badlogic.gdx.physics.box2d.World;
 
 import box2dLight.PointLight;
 import box2dLight.RayHandler;
-import entities.Entities;
+import entities.Enemy;
+import entities.Player;
+import entitysystems.AIMovementSystem;
 import entitysystems.Box2DRenderSystem;
 import entitysystems.CameraSystem;
 import entitysystems.DebugRenderSystem;
 import entitysystems.PlayerInputSystem;
 import functions.MapLoader;
-
 import static variables.Variables.PIXELS_TO_METERS;
 
 public class EntityManager {
@@ -58,6 +59,7 @@ public class EntityManager {
 		
 		//Create all needed systems
 		PlayerInputSystem pis = new PlayerInputSystem(e, world);
+		AIMovementSystem aims = new AIMovementSystem(e, world);
 		CameraSystem cs = new CameraSystem(camera);
 		Box2DRenderSystem brs = new Box2DRenderSystem(world, batch, tmRenderer, camera,rayHandler);
 		DebugRenderSystem drs = new DebugRenderSystem(world, debugRenderer, camera); //use only 1 render system at a time
@@ -67,13 +69,15 @@ public class EntityManager {
 		engine.addSystem(cs);
 		//engine.addSystem(brs); //only add one render system at a time
 		engine.addSystem(drs);
+		engine.addSystem(aims);
 
 		//Create box2d Player		
-		Entity player = Entities.box2DPlayer(100, 100, new Texture(Gdx.files.local("player_40x40.png")), world);
-		engine.addEntity(player);		
-		
+		Entity player = new Player(640, 360, new Texture(Gdx.files.local("player_40x40.png")), world);
+		Entity enemy = new Enemy(700, 500, new Texture(Gdx.files.local("enemy_40x40.png")), world);
+		engine.addEntity(player);
+		engine.addEntity(enemy);
+
 		new PointLight(rayHandler, 200, Color.CYAN, 100, 500, 500);
-		
 	}
 
 	public void update() {

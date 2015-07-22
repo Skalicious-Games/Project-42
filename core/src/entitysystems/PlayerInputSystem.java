@@ -13,8 +13,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 
 import components.BodyComponent;
+import components.InventoryComponent;
 import components.PlayerInputComponent;
-import entities.Entities;
+import entities.Bullet;
 
 public class PlayerInputSystem extends IteratingSystem {	
 	Engine engine;
@@ -27,6 +28,7 @@ public class PlayerInputSystem extends IteratingSystem {
 	Sound shot = Gdx.audio.newSound(Gdx.files.local("SoundMorph - Future Weapons/Alliance-AssaultRifle_05-Single_Shot-04.wav"));
 	
 	private ComponentMapper<BodyComponent> bm = ComponentMapper.getFor(BodyComponent.class);
+	private ComponentMapper<InventoryComponent> im = ComponentMapper.getFor(InventoryComponent.class);
 	
 	public PlayerInputSystem(Engine e, World world) {
 		super(Family.all(PlayerInputComponent.class).get());
@@ -73,14 +75,24 @@ public class PlayerInputSystem extends IteratingSystem {
 		}
 		
 		//Mouse input
+		
+		int mouseX = Gdx.input.getX();
+		int mouseY = Gdx.input.getY();
+		
 		if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
-			if (bulletTimer > 0.1) {
-				Entity bullet = Entities.bullet(body.body.getPosition().x, body.body.getPosition().y, 
+			if (bulletTimer > 0.3) {
+				Entity bullet = new Bullet(body.body.getPosition().x, body.body.getPosition().y, 
 						new Texture(Gdx.files.local("bullet_20x10.png")), world, Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY());
 				engine.addEntity(bullet);
 				bulletTimer = 0;
 				shot.play();
 			}
+		}
+		
+		//Open Inventory
+		if (Gdx.input.isKeyPressed(Input.Keys.E)) {
+			InventoryComponent ic = im.get(entity);
+			ic.setOpen(true);
 		}
 	}
 
