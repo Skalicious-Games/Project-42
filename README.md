@@ -19,7 +19,10 @@ IMPORT PROCEDURE
 
 LibGDX tutorials
 http://www.gamefromscratch.com/page/LibGDX-Tutorial-series.aspx (text)
+
 http://www.gamefromscratch.com/page/LibGDX-Video-Tutorial-Series.aspx (video)
+
+http://libgdx.toxsickproductions.com/category/libgdx-basics/
 
 Helpful Youtube Channels
 
