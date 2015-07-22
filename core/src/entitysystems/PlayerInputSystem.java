@@ -14,7 +14,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import components.BodyComponent;
 import components.InventoryComponent;
 import components.PlayerInputComponent;
-import entities.Entities;
+import entities.Bullet;
 
 public class PlayerInputSystem extends IteratingSystem {	
 	Engine engine;
@@ -78,7 +78,7 @@ public class PlayerInputSystem extends IteratingSystem {
 		
 		if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
 			if (bulletTimer > 0.3) {
-				Entity bullet = Entities.bullet(body.body.getPosition().x, body.body.getPosition().y, 
+				Entity bullet = new Bullet(body.body.getPosition().x, body.body.getPosition().y, 
 						new Texture(Gdx.files.local("bullet_20x10.png")), world, Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY());
 				engine.addEntity(bullet);
 				bulletTimer = 0;

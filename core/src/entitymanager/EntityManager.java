@@ -16,14 +16,14 @@ import com.badlogic.gdx.physics.box2d.World;
 
 import box2dLight.PointLight;
 import box2dLight.RayHandler;
-import entities.Entities;
+import entities.Enemy;
+import entities.Player;
 import entitysystems.AIMovementSystem;
 import entitysystems.Box2DRenderSystem;
 import entitysystems.CameraSystem;
 import entitysystems.DebugRenderSystem;
 import entitysystems.PlayerInputSystem;
 import functions.MapLoader;
-
 import static variables.Variables.PIXELS_TO_METERS;
 
 public class EntityManager {
@@ -72,8 +72,8 @@ public class EntityManager {
 		engine.addSystem(aims);
 
 		//Create box2d Player		
-		Entity player = Entities.box2DPlayer(640, 360, new Texture(Gdx.files.local("player_40x40.png")), world);
-		Entity enemy = Entities.enemy(700, 500, new Texture(Gdx.files.local("enemy_40x40.png")), world);
+		Entity player = new Player(640, 360, new Texture(Gdx.files.local("player_40x40.png")), world);
+		Entity enemy = new Enemy(700, 500, new Texture(Gdx.files.local("enemy_40x40.png")), world);
 		engine.addEntity(player);
 		engine.addEntity(enemy);
 
