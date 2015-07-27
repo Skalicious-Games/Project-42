@@ -84,6 +84,7 @@ public class Story implements Screen {
 		engine.addEntity(enemy);
 
 		new PointLight(rayHandler, 200, Color.CYAN, 100, 500, 500);
+
 	}
 
 	@Override
